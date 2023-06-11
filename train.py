@@ -476,7 +476,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
                 
                 if best_fitness == fi:
                     # torch.save(ckpt, best)
-                    mlflow.pytorch.save_model(ckpt,model_path)
+                    mlflow.pytorch.save_model(model,model_path)
                 if (epoch > 0) and (opt.save_period > 0) and (epoch % opt.save_period == 0):
                     torch.save(ckpt, w / f'epoch{epoch}.pt')
                     
