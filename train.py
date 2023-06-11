@@ -447,8 +447,8 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
             }
             mlflow.log_metric("Precision",results[0])
             mlflow.log_metric("Recall",results[1])
-            mlflow.log_metric("mAP@.5",results[2])
-            mlflow.log_metric("mAP@.5-.95",results[3])
+            mlflow.log_metric("mAP.5",results[2])
+            mlflow.log_metric("mAP.5-.95",results[3])
             
             
             
