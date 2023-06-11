@@ -52,7 +52,7 @@ from utils.general import (LOGGER, check_amp, check_dataset, check_file, check_g
                            increment_path, init_seeds, intersect_dicts, labels_to_class_weights,
                            labels_to_image_weights, methods, one_cycle, print_args, print_mutation, strip_optimizer)
 from utils.loggers import Loggers
-from utils.loggers.wandb.wandb_utils import check_wandb_resume
+from utils.loggers.wandb.wandb_utils import 
 from utils.loss import ComputeLoss
 from utils.metrics import fitness
 from utils.plots import plot_evolve, plot_labels
@@ -577,25 +577,25 @@ def main(opt, callbacks=Callbacks()):
         check_git_status()
         check_requirements(exclude=['thop'])
 
-    # Resume
-    if opt.resume and not check_wandb_resume(opt) and not opt.evolve:  # resume an interrupted run
-        ckpt = opt.resume if isinstance(opt.resume, str) else get_latest_run()  # specified or most recent path
-        assert os.path.isfile(ckpt), 'ERROR: --resume checkpoint does not exist'
-        with open(Path(ckpt).parent.parent / 'opt.yaml', errors='ignore') as f:
-            opt = argparse.Namespace(**yaml.safe_load(f))  # replace
-        opt.cfg, opt.weights, opt.resume = '', ckpt, True  # reinstate
-        LOGGER.info(f'Resuming training from {ckpt}')
-    else:
-        opt.data, opt.cfg, opt.hyp, opt.weights, opt.project = \
-            check_file(opt.data), check_yaml(opt.cfg), check_yaml(opt.hyp), str(opt.weights), str(opt.project)  # checks
-        assert len(opt.cfg) or len(opt.weights), 'either --cfg or --weights must be specified'
-        if opt.evolve:
-            if opt.project == str(ROOT / 'runs/train'):  # if default project name, rename to runs/evolve
-                opt.project = str(ROOT / 'runs/evolve')
-            opt.exist_ok, opt.resume = opt.resume, False  # pass resume to exist_ok and disable resume
-        if opt.name == 'cfg':
-            opt.name = Path(opt.cfg).stem  # use model.yaml as name
-        opt.save_dir = str(increment_path(Path(opt.project) / opt.name, exist_ok=opt.exist_ok))
+#     # Resume
+#     if opt.resume and not check_wandb_resume(opt) and not opt.evolve:  # resume an interrupted run
+#         ckpt = opt.resume if isinstance(opt.resume, str) else get_latest_run()  # specified or most recent path
+#         assert os.path.isfile(ckpt), 'ERROR: --resume checkpoint does not exist'
+#         with open(Path(ckpt).parent.parent / 'opt.yaml', errors='ignore') as f:
+#             opt = argparse.Namespace(**yaml.safe_load(f))  # replace
+#         opt.cfg, opt.weights, opt.resume = '', ckpt, True  # reinstate
+#         LOGGER.info(f'Resuming training from {ckpt}')
+#     else:
+#         opt.data, opt.cfg, opt.hyp, opt.weights, opt.project = \
+#             check_file(opt.data), check_yaml(opt.cfg), check_yaml(opt.hyp), str(opt.weights), str(opt.project)  # checks
+#         assert len(opt.cfg) or len(opt.weights), 'either --cfg or --weights must be specified'
+#         if opt.evolve:
+#             if opt.project == str(ROOT / 'runs/train'):  # if default project name, rename to runs/evolve
+#                 opt.project = str(ROOT / 'runs/evolve')
+#             opt.exist_ok, opt.resume = opt.resume, False  # pass resume to exist_ok and disable resume
+#         if opt.name == 'cfg':
+#             opt.name = Path(opt.cfg).stem  # use model.yaml as name
+#         opt.save_dir = str(increment_path(Path(opt.project) / opt.name, exist_ok=opt.exist_ok))
 
     # DDP mode
     device = select_device(opt.device, batch_size=opt.batch_size)
