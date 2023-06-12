@@ -472,7 +472,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
 
                 # Save last, best and delete
                 timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-                model_path = f"./yolov5/model_{timestamp}"
+                model_path = f"./yolov5/mymodel_{timestamp}"
                 
                 if best_fitness == fi:
                     # torch.save(ckpt, best)
